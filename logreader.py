@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import pandas
 
-name='LOG_L100N256_010921_2cdm_power00_sigma1_outrageousmass'
+name='/Users/rakshakadhikari/Desktop/compare_L1N1024_cdm_2cdm_delm0_const100_all_light/L1N1024_042421_sigmacons100_delm0/LOG_L1N11024_mod_042421_sigma_cons_100_delm0_from0.10z'
 
 stringToMatch = 'percent of particles' 
 matchedLine = '' 
@@ -24,9 +24,8 @@ with open(name, 'r') as file:
                                 strtemp00=matchedLine[:10]
                                 percent00=float(strtemp00[-4:])
                                 percent_light_particle.append(percent00)
-                                numeric_string0 = re.sub("[^0-9]", "", matchedLine[37:51])
-
-                                number_light_particle.append(int(numeric_string0))
+                                number_light_particle.append(int(matchedLine[39:50]))
+                                
                                 
                         if 'state 01' in line: 
 
@@ -54,7 +53,6 @@ for i in range(0,len(percent_heavy_particle)):
 
 ##############
 
-print(percent_heavy_particle[1000],percent_light_particle[1000])        
 
 x=len(percent_heavy_particle)
 snap=[0,2,50,100,int(x/4),int(x/3),int(x/2),x-1]
@@ -73,7 +71,7 @@ for i in snap:
 print('l',light)
         
 ##########plotting to plot the data#################
-fig,ax=plt.subplots(figsize=(6,7))
+fig,ax=plt.subplots(figsize=(7.2,8.4))
 
 
 
@@ -103,16 +101,17 @@ plt.subplots_adjust(bottom=0.4)
 
 
 
-plt.title("# Light & Heavy"+name[4:12]+name[-15:])
+plt.title("Evolution of Light and Heavy Species"+name[4:12])
 plt.xlabel("Time-Step")
 plt.ylabel("Number of particles")
 plt.legend()
 
 
-output_filename = 'Species_number'+name[4:12] +name[-15:] +'.png'
+output_filename = 'Species_number'+'L1N1024'+ '.png'
 print(output_filename)
-plt.savefig(output_filename)
+plt.savefig(output_filename,dpi=150)
 plt.show()
+
 
 
 
